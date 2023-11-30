@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pod_player/pod_player.dart';
+import 'package:work/screens/add.dart';
+import 'package:work/screens/home.dart';
+import 'package:work/screens/profile.dart';
+import 'package:work/screens/subscript.dart';
 
 import '../model/project_model.dart';
 import '../model/project_model.dart';
@@ -13,13 +17,20 @@ class Tube extends StatefulWidget {
 }
 
 class _TubeState extends State<Tube> {
+List<Widget>screens=[
+  Home(),
+  Add(),
+  Subscript(),
+  Profile()
+];
+  int index= 0;
   @override
   late final PodPlayerController controller;
 List<Projectmodel> listprojects = [
   Projectmodel(
       url: 'https://www.youtube.com/shorts/ZkSmcw2UhFs'),
   Projectmodel(url: "https://www.youtube.com/watch?v=mSSyv5ommg0")
-  
+
 ];
   @override
   void initState() {
@@ -38,351 +49,56 @@ List<Projectmodel> listprojects = [
     super.dispose();
   }
   Widget build(BuildContext context) {
-    return DefaultTabController(
-      length: 23,
-      child: Scaffold(
+    return
+       Scaffold(
         backgroundColor: Colors.black,
-        appBar: AppBar(
-          leading:
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Image(image: AssetImage("assets/youtube.png"),
-            width: 21,
-            height: 22),
-          ),
+        body:screens[index],
 
-          backgroundColor: Colors.black,
-          title: Text("YouTube",
-          style: GoogleFonts.leagueGothic(
-            color: Colors.white,
-            // fontWeight: FontWeight.bold
-          )),
-          bottom: PreferredSize(child:
-          TabBar(
-                dividerColor: Colors.transparent,
-              indicator: ShapeDecoration(color: Colors.transparent,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadiusDirectional.circular(8),
-                ),
+      bottomNavigationBar:
+      BottomNavigationBar(
+        landscapeLayout:BottomNavigationBarLandscapeLayout.linear ,
+          onTap: (valve) {
+            setState(() {
+              index=valve;
+            });
+          },
+          backgroundColor:Colors.transparent,
+            selectedItemColor: Colors.white,
+          unselectedItemColor: Colors.yellow,
+          unselectedFontSize: 10,
+          selectedFontSize: 10,
+          currentIndex:index ,
+
+          items: [
+            BottomNavigationBarItem(
+                label: "Home",
+                icon: Icon(Icons.home_filled,
+                // color: Colors.white,
+                )),
+            BottomNavigationBarItem(label: 'Add',
+                icon: AnimatedContainer(
+                  duration: Duration(milliseconds: 1),
+                  child: Image.asset('assets/plus.png',
+                      height: 25,
+                     ),
+                  )),
+            BottomNavigationBarItem(label: 'Subscriptions',
+                icon:
+             Image.asset('assets/play.png',
+                height: 25,
               ),
-              isScrollable: true,
-              tabs: [
-
-                Tab(child:
-                            Container(
-                              decoration: BoxDecoration(
-                                color: Colors.white24,
-                                borderRadius: BorderRadius.circular(5)
-                              ),
-                  height: 33,
-                  width: 48,
-                  child:
-                      Image(image: AssetImage("assets/icons8-compass-24.png"),
-                              color: Colors.white)
-                            )
-                ),
-                Tab(
-                 child: Container(
-                   child: Center(child: Text("All",
-                     style:TextStyle(color: Colors.white) ,)),
-                   height: 33,
-                   width: 44,
-                   decoration: BoxDecoration(
-                     color: Colors.white24,
-                       borderRadius: BorderRadius.circular(5)),
-                 ),
-                  // text: ,
-                ),
-                Tab(
-                 child: Container(
-                   child: Center(child: Text("New to you",
-                     style:TextStyle(color: Colors.white) ,)),
-                   height: 33,
-                   width: 90,
-                   decoration: BoxDecoration(
-                     color: Colors.white24,
-                       borderRadius: BorderRadius.circular(5)),
-                 ),
-                  // text: ,
-                ),
-                Tab(
-                 child: Container(
-                   child: Center(child: Text("Sports entertainment",
-                     style:TextStyle(color: Colors.white) ,)),
-                   height: 33,
-                   width: 150,
-                   decoration: BoxDecoration(
-                     color: Colors.white24,
-                       borderRadius: BorderRadius.circular(5)),
-                 ),
-                  // text: ,
-                ),
-                Tab(
-                  child: Container(
-                    child: Center(child: Text("Music",
-                      style:TextStyle(color: Colors.white) ,)),
-                    height: 33,
-                    width: 56,
-                    decoration: BoxDecoration(
-                        color: Colors.white24,
-                        borderRadius: BorderRadius.circular(5)),
+             ),
+            BottomNavigationBarItem(label: 'You',
+                icon: CircleAvatar(
+                    radius: 11,
+                    backgroundColor: Colors.purple,
+                    child: Text("I",
+                    style: TextStyle(
+                      color: Colors.white
+                    )),
                   ),
-                  // text: ,
-                ),
-                Tab(
-                  child: Container(
-                    child: Center(child: Text("Gaming",
-                      style:TextStyle(color: Colors.white) ,)),
-                    height: 33,
-                    width: 85,
-                    decoration: BoxDecoration(
-                        color: Colors.white24,
-                        borderRadius: BorderRadius.circular(5)),
-                  ),
-                  // text: ,
-                ),
-                Tab(
-                  child: Container(
-                    child: Center(child: Text("Mixes",
-                      style:TextStyle(color: Colors.white) ,)),
-                    height: 33,
-                    width: 56,
-                    decoration: BoxDecoration(
-                        color: Colors.white24,
-                        borderRadius: BorderRadius.circular(5)),
-                  ),
-                  // text: ,
-                ),
-                Tab(
-                  child: Container(
-                    child: Center(child: Text("Dhar Mann",
-                      style:TextStyle(color: Colors.white) ,)),
-                    height: 33,
-                    width: 89,
-                    decoration: BoxDecoration(
-                        color: Colors.white24,
-                        borderRadius: BorderRadius.circular(5)),
-                  ),
-                  // text: ,
-                ),
-                Tab(
-                  child: Container(
-                    child: Center(child: Text("Nollywood",
-                      style:TextStyle(color: Colors.white) ,)),
-                    height: 33,
-                    width: 87,
-                    decoration: BoxDecoration(
-                        color: Colors.white24,
-                        borderRadius: BorderRadius.circular(5)),
-                  ),
-                  // text: ,
-                ),
-                Tab(
-                  child: Container(
-                    child: Center(child: Text("WWE 2K23",
-                      style:TextStyle(color: Colors.white) ,)),
-                    height: 33,
-                    width: 90,
-                    decoration: BoxDecoration(
-                        color: Colors.white24,
-                        borderRadius: BorderRadius.circular(5)),
-                  ),
-                  // text: ,
-                ),
-                Tab(
-                  child: Container(
-                    child: Center(child: Text("Live",
-                      style:TextStyle(color: Colors.white) ,)),
-                    height: 33,
-                    width: 54,
-                    decoration: BoxDecoration(
-                        color: Colors.white24,
-                        borderRadius: BorderRadius.circular(5)),
-                  ),
-                  // text: ,
-                ),
-                Tab(
-                  child: Container(
-                    child: Center(child: Text("Sketch comedy",
-                      style:TextStyle(color: Colors.white) ,)),
-                    height: 33,
-                    width: 110,
-                    decoration: BoxDecoration(
-                        color: Colors.white24,
-                        borderRadius: BorderRadius.circular(5)),
-                  ),
-                  // text: ,
-                ),
-                Tab(
-                  child: Container(
-                    child: Center(child: Text("Game shows",
-                      style:TextStyle(color: Colors.white) ,)),
-                    height: 33,
-                    width: 87,
-                    decoration: BoxDecoration(
-                        color: Colors.white24,
-                        borderRadius: BorderRadius.circular(5)),
-                  ),
-                  // text: ,
-                ),
-                Tab(
-                  child: Container(
-                    child: Center(child: Text("Thoughts",
-                      style:TextStyle(color: Colors.white) ,)),
-                    height: 33,
-                    width: 87,
-                    decoration: BoxDecoration(
-                        color: Colors.white24,
-                        borderRadius: BorderRadius.circular(5)),
-                  ),
-                  // text: ,
-                ),
-                Tab(
-                  child: Container(
-                    child: Center(child: Text("Cristiano Ronaldo",
-                      style:TextStyle(color: Colors.white) ,)),
-                    height: 33,
-                    width: 125,
-                    decoration: BoxDecoration(
-                        color: Colors.white24,
-                        borderRadius: BorderRadius.circular(5)),
-                  ),
-                  // text: ,
-                ),
-                Tab(
-                  child: Container(
-                    child: Center(child: Text("Sports leagues",
-                      style:TextStyle(color: Colors.white) ,)),
-                    height: 33,
-                    width: 110,
-                    decoration: BoxDecoration(
-                        color: Colors.white24,
-                        borderRadius: BorderRadius.circular(5)),
-                  ),
-                  // text: ,
-                ),
-                Tab(
-                  child: Container(
-                    child: Center(child: Text("Pop Music",
-                      style:TextStyle(color: Colors.white) ,)),
-                    height: 33,
-                    width: 90,
-                    decoration: BoxDecoration(
-                        color: Colors.white24,
-                        borderRadius: BorderRadius.circular(5)),
-                  ),
-                  // text: ,
-                ),
-                Tab(
-                  child: Container(
-                    child: Center(child: Text("Blessings",
-                      style:TextStyle(color: Colors.white) ,)),
-                    height: 33,
-                    width: 85,
-                    decoration: BoxDecoration(
-                        color: Colors.white24,
-                        borderRadius: BorderRadius.circular(5)),
-                  ),
-                  // text: ,
-                ),
-                Tab(
-                  child: Container(
-                    child: Center(child: Text("Rapping",
-                      style:TextStyle(color: Colors.white) ,)),
-                    height: 33,
-                    width: 85,
-                    decoration: BoxDecoration(
-                        color: Colors.white24,
-                        borderRadius: BorderRadius.circular(5)),
-                  ),
-                  // text: ,
-                ),
-                Tab(
-                  child: Container(
-                    child: Center(child: Text("Lessons",
-                      style:TextStyle(color: Colors.white) ,)),
-                    height: 33,
-                    width: 85,
-                    decoration: BoxDecoration(
-                        color: Colors.white24,
-                        borderRadius: BorderRadius.circular(5)),
-                  ),
-                  // text: ,
-                ),
-                Tab(
-                  child: Container(
-                    child: Center(child: Text("Recently uploaded",
-                      style:TextStyle(color: Colors.white) ,)),
-                    height: 33,
-                    width: 132,
-                    decoration: BoxDecoration(
-                        color: Colors.white24,
-                        borderRadius: BorderRadius.circular(5)),
-                  ),
-                  // text: ,
-                ),
-                Tab(
-                  child: Container(
-                    child: Center(child: Text("Flutter",
-                      style:TextStyle(color: Colors.white) ,)),
-                    height: 33,
-                    width: 90,
-                    decoration: BoxDecoration(
-                        color: Colors.white24,
-                        borderRadius: BorderRadius.circular(5)),
-                  ),
-                  // text: ,
-                ),
-                Tab(
-                  child: Container(
-                    child: Center(child: Text("Send feedback",
-                      style:TextStyle(color: Colors.blue)
-                      )),
-                    height: 33,
-                    width: 100,
-
-                  ),
-                  // text: ,
-                ),
-
-
-              ]), preferredSize: Size.fromHeight(44)),
-          actions: [
-
-          Image(image: AssetImage("assets/cast.png"),
-            color: Colors.white,
-            width: 23,
-            height: 23,
-          ),
-            SizedBox(width: 26),
-            Image(image: AssetImage("assets/icons8-notification-50.png"),
-            color: Colors.white,
-            width: 21,
-            height: 21,
-          ),
-            SizedBox(width: 14),
-            Padding(
-              padding: const EdgeInsets.only(right: 10),
-              child: IconButton(onPressed: () {
-
-              }, icon:Icon(Icons.search,
-                color: Colors.white,) ),
-            ),
-          ],
-        ),
-        body:
-        ListView.builder
-          (itemBuilder:(
-            BuildContext context, int index) {
-          return PodVideoPlayer
-            (controller: controller);},
-        itemCount: listprojects.length,
-          scrollDirection: Axis.vertical,
-
-         ),
-
-
-      ),
-    );
+                 )
+          ]),
+       );
   }
 }

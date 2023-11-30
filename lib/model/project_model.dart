@@ -1,9 +1,15 @@
 class Projectmodel{
   final String url;
-
+  final  title;
+  final  image;
+  final  subtitle;
 
   Projectmodel (
-  { required this.url,
+
+  {  this.title,
+    this.image,
+    this.subtitle,
+    required this.url,
 
 });
 }
